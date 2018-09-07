@@ -27,12 +27,20 @@
   to { transform: rotate(360deg); }
 }
 
+.book-container {
+  margin: 80px;
+}
+
+.short-description {
+  width: 50%;
+}
+
 p {
   width: 40%;
 }
 
 img {
-  width: 200px;
-  height: 200px;
-  margin-left: 550px;
+  width: 20%;
+  height: 20%;
+  float: right;
 }
