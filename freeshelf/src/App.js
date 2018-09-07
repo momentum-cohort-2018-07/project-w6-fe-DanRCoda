@@ -7,14 +7,24 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      books: books
+      books: books,
+      isHidden: true
     }
+  }
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
   }
 
   render () {
     return (
-      <div className='App'>
+      <div className='Books'>
         {(this.state.books.map((book, idx) => <BookView book={book} />))}
+        {/* <button onClick={this.toggleHidden.bind(this)} >
+        Click to show modal
+        </button>
+        {!this.state.isHidden && <BookView />} */}
       </div>
     )
   }
