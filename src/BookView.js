@@ -18,8 +18,8 @@ class BookView extends Component {
         <p><strong>URL:</strong> <a href={book.url}>{book.url}</a></p>
         <p><strong>Publisher:</strong> {book.publisher}</p>
         <p><strong>Publication Date:</strong> {book.publicationDate}</p>
-        <p><strong>Full Description:</strong> {book.detailedDescription}
-        </p>
+        <p><strong>Full Description:</strong> {book.detailedDescription}</p>
+        <button className='edit-book' onClick={() => this.setState({editing: true})}>Edit Book</button>
       </div>
     )
   }
@@ -28,6 +28,7 @@ class BookView extends Component {
     let { book } = this.props
 
     if (this.state.editing) {
+      console.log('hi')
       return <EditBookView book={book} />
     }
 
@@ -43,7 +44,7 @@ class BookView extends Component {
       <div className='book-container'>
         <div className='book-info'>
           <img className='book-image' src={book.coverImageUrl} alt='Book Image' />
-          <div className='book-title'> {book.title} </div>
+          <div className='book-title'>{book.title}</div>
           <div className='book-author'>{book.author}</div>
           <div className='short-description'>{book.shortDescription}</div>
           {moreInfo}

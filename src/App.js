@@ -20,9 +20,23 @@ class App extends Component {
       })
   }
 
-  // updateBook(bookId, field, value) {
+  updateBookInfo () {
+    request.post('http://localhost:4000/books')
+      .then(res => {
+        if (!res.ok) {
+          this.setState({error: true})
+        }
+      })
+  }
 
-  // }
+  updateBook (bookId, field, value) {
+    const book = this.state.books
+    book.editing[value] = field
+    this.setState({
+      books: this.state.editing
+    })
+    this.updateBookInfo()
+  }
 
   render () {
     return (
