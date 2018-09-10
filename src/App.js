@@ -9,6 +9,8 @@ class App extends Component {
     this.state = {
       books: []
     }
+    this.updateBook = this.updateBook.bind(this)
+    this.updatedBookInfo = this.updatedBookInfo.bind(this)
   }
 
   componentDidMount () {
@@ -20,31 +22,30 @@ class App extends Component {
       })
   }
 
-  updateBookInfo () {
-    request.post('http://localhost:4000/books')
-      .then(res => {
-        if (!res.ok) {
-          this.setState({error: true})
-        }
-      })
+  updatedBookInfo (book) {
+    let bookID = book.id
+    request.post(`http://localhost:4000/books/${bookID}`)
+      .send(book)
   }
 
   updateBook (bookId, field, value) {
-    const book = this.state.books
-    book.editing[value] = field
-    this.setState({
-      books: this.state.editing
+    console.log(this.state.editing)
+    this.setState(state => {
+      let book = this.state.books.find(book => book.id === bookId)
+      book[field] = value
+      this.updateBookInfo(book)
+      return {
+        books: state.books
+      }
     })
-    this.updateBookInfo()
   }
 
   render () {
     return (
       <div className='Books'>
-        {(this.state.books.map((book, idx) => <BookView key={idx} book={book} />))}
+        {(this.state.books.map((book, idx) => <BookView key={idx} book={book} updateBook={this.updateBook} updatedBookInfo={this.updatedBookInfo} />))}
       </div>
     )
   }
 }
-
 export default App

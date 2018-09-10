@@ -15,7 +15,7 @@ class BookView extends Component {
     return (
       <div className='more-info'>
         <button className='show-less' onClick={() => this.setState({showMore: false})}>Show less</button>
-        <p><strong>URL:</strong> <a href={book.url}>{book.url}</a></p>
+        <p><strong>URL:</strong> <a href={book.url}>{book.title}</a></p>
         <p><strong>Publisher:</strong> {book.publisher}</p>
         <p><strong>Publication Date:</strong> {book.publicationDate}</p>
         <p><strong>Full Description:</strong> {book.detailedDescription}</p>
@@ -26,10 +26,11 @@ class BookView extends Component {
 
   render () {
     let { book } = this.props
+    console.log(this.props.book)
+    // let bookId = this.props.book.id
 
     if (this.state.editing) {
-      console.log('hi')
-      return <EditBookView book={book} />
+      return <EditBookView book={book} updateBook={this.props.updateBook} updatedBookInfo={this.props.updatedBookInfo} />
     }
 
     let moreInfo

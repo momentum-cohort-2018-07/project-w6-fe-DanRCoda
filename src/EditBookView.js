@@ -2,27 +2,23 @@ import React from 'react'
 
 class EditBookView extends React.Component {
   constructor (props) {
-    super(props)
-    this.state = {
-      editField: true
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    super()
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleChange () {
-    this.setState({editField: true})
-  }
-  handleClick () {
-    this.setState({books: this.state.value})
+  handleSubmit () {
+    let updatedBook = this.props.book
+    updatedBookInfo(updatedBook)
   }
 
   render (books) {
     let { book } = this.props
     return (
-      <form>
-        <textarea type='text' value={book.title} onChange={this.handleChange} />
-        <button onClick={this.handleClick}>Submit</button>
-      </form>
+      <div>
+        <input type='text' value={book.title} onChange={event => {
+          this.props.updateBook(book.id, 'title', event.target.value)
+        }} />
+        <button onClick={this.handleSubmit.bind(this)}>Submit</button>
+      </div>
     )
   }
 }
