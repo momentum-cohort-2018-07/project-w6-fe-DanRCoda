@@ -5,7 +5,7 @@ class EditBookView extends React.Component {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleSubmit () {
+  handleSubmit (updatedBookInfo) {
     let updatedBook = this.props.book
     updatedBookInfo(updatedBook)
   }
@@ -17,7 +17,7 @@ class EditBookView extends React.Component {
         <input type='text' value={book.title} onChange={event => {
           this.props.updateBook(book.id, 'title', event.target.value)
         }} />
-        <button onClick={this.handleSubmit.bind(this)}>Submit</button>
+        <button onClick={this.handleSubmit}>Submit</button>
       </div>
     )
   }

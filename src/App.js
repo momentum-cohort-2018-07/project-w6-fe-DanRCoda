@@ -33,7 +33,7 @@ class App extends Component {
     this.setState(state => {
       let book = this.state.books.find(book => book.id === bookId)
       book[field] = value
-      this.updateBookInfo(book)
+      this.updatedBookInfo(book)
       return {
         books: state.books
       }
