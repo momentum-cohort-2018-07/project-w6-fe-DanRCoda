@@ -5,9 +5,10 @@ class EditBookView extends React.Component {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleSubmit (updatedBookInfo) {
-    let updatedBook = this.props.book
-    updatedBookInfo(updatedBook)
+
+  handleSubmit (event) {
+    event.preventDefault()
+    this.props.setEditing(false)
   }
 
   render (books) {

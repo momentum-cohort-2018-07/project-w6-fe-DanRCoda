@@ -9,17 +9,22 @@ class BookView extends Component {
       showMore: false,
       editing: false
     }
+    this.setEditing = this.setEditing.bind(this)
+  }
+
+  setEditing (editing) {
+    this.setState({ editing: editing })
   }
 
   renderMoreInfo (book) {
     return (
       <div className='more-info'>
-        <button className='show-less' onClick={() => this.setState({showMore: false})}>Show less</button>
+        <button className='show-less' onClick={() => this.setState({ showMore: false })}>Show less</button>
         <p><strong>URL:</strong> <a href={book.url}>{book.title}</a></p>
         <p><strong>Publisher:</strong> {book.publisher}</p>
         <p><strong>Publication Date:</strong> {book.publicationDate}</p>
         <p><strong>Full Description:</strong> {book.detailedDescription}</p>
-        <button className='edit-book' onClick={() => this.setState({editing: true})}>Edit Book</button>
+        <button className='edit-book' onClick={() => this.setState({ editing: true })}>Edit Book</button>
       </div>
     )
   }
@@ -30,7 +35,7 @@ class BookView extends Component {
     // let bookId = this.props.book.id
 
     if (this.state.editing) {
-      return <EditBookView book={book} updateBook={this.props.updateBook} updatedBookInfo={this.props.updatedBookInfo} />
+      return <EditBookView book={book} updateBook={this.props.updateBook} setEditing={this.setEditing} />
     }
 
     let moreInfo
@@ -38,7 +43,7 @@ class BookView extends Component {
     if (this.state.showMore) {
       moreInfo = this.renderMoreInfo(book)
     } else {
-      moreInfo = <button className='show-more' onClick={() => this.setState({showMore: true})}>Show more</button>
+      moreInfo = <button className='show-more' onClick={() => this.setState({ showMore: true })}>Show more</button>
     }
 
     return (

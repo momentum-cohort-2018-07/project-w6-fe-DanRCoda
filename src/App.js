@@ -10,7 +10,7 @@ class App extends Component {
       books: []
     }
     this.updateBook = this.updateBook.bind(this)
-    this.updatedBookInfo = this.updatedBookInfo.bind(this)
+    this.updateBookInAPI = this.updateBookInAPI.bind(this)
   }
 
   componentDidMount () {
@@ -22,10 +22,10 @@ class App extends Component {
       })
   }
 
-  updatedBookInfo (book) {
+  updateBookInAPI (book) {
     let bookID = book.id
-    request.post(`http://localhost:4000/books/${bookID}`)
-      .send(book)
+    request.put(`http://localhost:4000/books/${bookID}`)
+      .send(book).end()
   }
 
   updateBook (bookId, field, value) {
@@ -33,7 +33,7 @@ class App extends Component {
     this.setState(state => {
       let book = this.state.books.find(book => book.id === bookId)
       book[field] = value
-      this.updatedBookInfo(book)
+      this.updateBookInAPI(book)
       return {
         books: state.books
       }
